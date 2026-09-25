@@ -82,12 +82,12 @@ def check_access(
             "general_chat",
         ]
 
-    # Recognize self-data / own-profile requests
-    is_own_data = (
-        target_resource == "own_profile"
+    # Recognize self-data / own-profile requests or general queries
+    is_always_allowed = (
+        target_resource in ("own_profile", "general", "knowledge_base", "product_data")
         or (target_owner_id is not None and target_owner_id == user_id)
     )
-    if is_own_data:
+    if is_always_allowed and target_resource == "own_profile":
         target_owner_id = user_id
         target_owner_role = user_role
 
@@ -156,11 +156,11 @@ def check_access(
         sens_idx = min(int(sens_score * len(sens_levels)), len(sens_levels) - 1)
         sens_label = sens_levels[sens_idx]
 
-        # Own data is always granted
-        if is_own_data:
+        # Own data and general queries are always granted
+        if is_always_allowed:
             allowed = True
             access_prob = max(access_prob, 1.0)
-            if tool_choice not in available_tools:
+            if target_resource == "own_profile" and tool_choice not in available_tools:
                 tool_choice = "get_user_info"
         else:
             allowed = access_prob >= 0.6  # Threshold: 60% probability
