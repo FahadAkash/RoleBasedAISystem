@@ -27,17 +27,11 @@ JWT_ALGORITHM = "HS256"
 JWT_EXPIRATION_MINUTES = 60 * 24  # 24 hours
 
 # ─── Google Gemini ───────────────────────────────────────────────────────────
-GEMINI_API_KEY = os.getenv(
-    "GEMINI_API_KEY",
-    "AQ.Ab8RN6Kj2WYBP0uLVWYDIiX9npzIZOB0EuNNVtTbFQrdI69AUQ",
-)
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 GEMINI_MODEL = "gemini-2.5-flash"
 
 # ─── TypeSafe / Jev ──────────────────────────────────────────────────────────
-TYPESAFE_API_KEY = os.getenv(
-    "TYPESAFE_API_KEY",
-    "apikey_2198fcac80d23f154270852a13c398079958_68b7c4127c410ca1948669434ea811d84cd25aa113d269cfac0587973857e376",
-)
+TYPESAFE_API_KEY = os.getenv("TYPESAFE_API_KEY", "")
 JEV_MODEL = "jev-latest"
 
 # ─── RAG Settings ────────────────────────────────────────────────────────────
